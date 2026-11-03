@@ -2,6 +2,7 @@
   "id": "./index.html",
   "name": "Hebreo Bíblico I",
   "short_name": "Hebreo I",
+  "description": "Aprende y practica hebreo bíblico: 140 palabras, qatal, sufijos pronominales, gramática y traducción de Génesis 1 y Éxodo 20.",
   "lang": "es-PE",
   "start_url": "./index.html",
   "scope": "./",
@@ -27,5 +28,10 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "categories": [
+    "education",
+    "books"
+  ],
+  "prefer_related_applications": false
 }
