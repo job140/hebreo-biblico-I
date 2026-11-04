@@ -1,11 +1,12 @@
 // Hebreo Bíblico I · Mantener la ruta ./sw.js para actualizar la app instalada.
 // En cada publicación, aumentar CACHE_VERSION para actualizar el contenido sin reinstalar.
-const CACHE_VERSION = '4.8.1';
+const CACHE_VERSION = '4.9.0';
 const CACHE_PREFIX = 'hebreo-biblico-i-';
 const CACHE_NAME = `${CACHE_PREFIX}${CACHE_VERSION}`;
 const APP_SHELL = [
   './', './index.html', './manifest.webmanifest', './genesis12.js',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './privacidad.html'
+  './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './privacidad.html',
+  './auth/firebase-config.js', './auth/account.js', './auth/account.css', './eliminar-cuenta.html'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));

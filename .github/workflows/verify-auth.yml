@@ -1,0 +1,32 @@
+name: Verificar cuentas y aplicación
+on:
+  push:
+    paths:
+      - 'auth/**'
+      - 'firebase/**'
+      - 'index.html'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'eliminar-cuenta.html'
+      - 'tests/**'
+      - '.github/workflows/verify-auth.yml'
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verificacion-estatica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar sintaxis JavaScript
+        run: |
+          node --check auth/account.js
+          node --check auth/firebase-config.js
+          node --check firebase/functions/index.js
+          node --check genesis12.js
+      - name: Ejecutar pruebas de contrato
+        run: node --test tests/auth-contract.test.cjs

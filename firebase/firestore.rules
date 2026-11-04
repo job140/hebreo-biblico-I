@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function own(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+    function staff(institutionId) {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/institutions/$(institutionId)/members/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/institutions/$(institutionId)/members/$(request.auth.uid)).data.role in ["teacher", "admin"];
+    }
+    // Códigos públicos de estudiante: únicos por lote, no son credenciales.
+    match /studentCodes/{code} {
+      allow get: if signedIn() && resource.data.uid == request.auth.uid;
+      allow list: if false;
+      allow create: if signedIn()
+        && code.matches('^HB-[A-F0-9]{16}$')
+        && request.resource.data.keys().hasOnly(["uid", "createdAt"])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && !exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.studentCode == code;
+      allow update, delete: if false;
+    }
+
+    match /users/{uid} {
+      allow get: if own(uid);
+      allow list: if false;
+      allow create: if own(uid)
+        && request.resource.data.keys().hasOnly([
+          "uid", "displayName", "email", "studentCode", "role", "accountType",
+          "institutionId", "institutionName", "createdAt", "updatedAt"
+        ])
+        && request.resource.data.keys().hasAll([
+          "uid", "displayName", "email", "studentCode", "role", "accountType",
+          "institutionId", "institutionName", "createdAt", "updatedAt"
+        ])
+        && request.resource.data.uid == uid
+        && request.resource.data.role == "student"
+        && request.resource.data.accountType == "public"
+        && request.resource.data.institutionId == null
+        && request.resource.data.institutionName == null
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() <= 80
+        && (request.resource.data.email == null || request.resource.data.email == request.auth.token.email)
+        && request.resource.data.studentCode is string
+        && request.resource.data.studentCode.matches('^HB-[A-F0-9]{16}$')
+        && !exists(/databases/$(database)/documents/studentCodes/$(request.resource.data.studentCode))
+        && getAfter(/databases/$(database)/documents/studentCodes/$(request.resource.data.studentCode)).data.uid == uid
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      // El usuario solo puede cambiar su nombre, no su rol, código ni institución.
+      allow update: if own(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["displayName", "updatedAt"])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() >= 2
+        && request.resource.data.displayName.size() <= 80
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false; // Usa la función deleteMyAccount.
+
+      match /progress/{documentId} {
+        allow get: if own(uid) && documentId == "main";
+        allow list: if false;
+        allow create: if own(uid) && documentId == "main"
+          && request.resource.data.keys().hasOnly(["progress", "revision", "updatedAt"])
+          && request.resource.data.keys().hasAll(["progress", "revision", "updatedAt"])
+          && request.resource.data.progress is map
+          && request.resource.data.progress.size() <= 200
+          && request.resource.data.revision == 1
+          && request.resource.data.updatedAt == request.time;
+        allow update: if own(uid) && documentId == "main"
+          && request.resource.data.keys().hasOnly(["progress", "revision", "updatedAt"])
+          && request.resource.data.progress is map
+          && request.resource.data.progress.size() <= 200
+          && request.resource.data.revision == resource.data.revision + 1
+          && request.resource.data.updatedAt == request.time;
+        allow delete: if false;
+      }
+    }
+
+    match /institutions/{institutionId} {
+      allow get: if signedIn() &&
+        exists(/databases/$(database)/documents/institutions/$(institutionId)/members/$(request.auth.uid));
+      allow list, create, update, delete: if false;
+      match /members/{uid} {
+        allow get: if own(uid) || staff(institutionId);
+        allow list: if staff(institutionId);
+        allow create, update, delete: if false; // Solo Admin SDK.
+      }
+    }
+    match /institutionInvites/{inviteHash} {
+      allow read, write: if false; // Solo Cloud Functions Admin SDK.
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

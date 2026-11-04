@@ -1,0 +1,9 @@
+node_modules/
+.env*
+firebase-debug.log
+firebase-debug.*.log
+firebase/functions/.env*
+firebase/functions/.secret.local
+service-account*.json
+*.key
+*.p8

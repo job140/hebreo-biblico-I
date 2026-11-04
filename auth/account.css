@@ -1,0 +1,36 @@
+/* Hebreo Bíblico I · cuentas y sincronización: estilo compatible con interfaz agua marina */
+.hb-account-open{display:inline-flex;gap:7px;align-items:center;justify-content:center;white-space:nowrap;border:1px solid rgba(15,132,135,.27);background:#e8f8f4;color:#08666a;border-radius:13px;padding:9px 12px;font:700 .83rem system-ui;cursor:pointer;min-height:39px}
+.hb-account-open:hover{background:#d1efe9}
+.hb-account-open .hb-account-icon{font-size:1.15rem}
+.hb-account-overlay[hidden],.hb-account-pane[hidden],.hb-auth-choice[hidden],.hb-sync-choice[hidden],.hb-institution-form[hidden]{display:none!important}
+.hb-account-overlay{position:fixed;inset:0;z-index:2147483644;display:flex;align-items:center;justify-content:center;background:rgba(7,32,37,.7);padding:15px}
+.hb-account-modal{position:relative;width:min(100%,520px);max-height:calc(100dvh - 30px);overflow-y:auto;background:#f8fdfc;color:#193c40;border:1px solid #b8ddd8;box-shadow:0 28px 90px rgba(0,0,0,.25);border-radius:22px;padding:25px}
+.hb-account-modal *{box-sizing:border-box}
+.hb-account-modal h2{margin:0;font:800 1.45rem system-ui;color:#124c51}
+.hb-account-modal h3{font:750 1.07rem system-ui;margin:18px 0 9px}
+.hb-account-modal p{font:400 .91rem/1.5 system-ui;margin:8px 0;color:#375b60}
+.hb-account-modal .hb-muted{color:#607d82;font-size:.8rem}
+.hb-account-close{position:absolute;right:18px;top:15px;background:transparent;border:0;color:#3b6065;font-size:1.6rem;cursor:pointer;padding:2px 7px}
+.hb-account-modal .hb-auth-btn{width:100%;min-height:44px;border:1px solid #b8d9d5;border-radius:12px;padding:11px 13px;margin-top:9px;background:#fff;color:#193c40;font:700 .92rem system-ui;text-align:center;cursor:pointer}
+.hb-account-modal .hb-auth-btn:disabled{opacity:.53;cursor:not-allowed}
+.hb-account-modal .hb-auth-primary{background:#087e83;color:#fff;border-color:#087e83}
+.hb-account-modal .hb-auth-danger{color:#9b3333;border-color:#e2bebe}
+.hb-account-modal .hb-auth-btn:not(:disabled):hover{filter:brightness(.96)}
+.hb-account-modal label{display:block;font:700 .82rem system-ui;color:#31575b;margin-top:12px}
+.hb-account-modal input{display:block;width:100%;border:1px solid #aacfc9;border-radius:10px;padding:12px;margin-top:5px;background:#fff;color:#1b3b40;font:500 .95rem system-ui;outline-offset:2px}
+.hb-account-modal .hb-pill{display:inline-block;border:1px solid #a6d2cd;border-radius:999px;background:#e7f7f4;padding:4px 9px;color:#20686a;font:700 .74rem system-ui}
+.hb-account-modal .hb-divider{height:1px;background:#d9ebe8;margin:18px 0}
+.hb-account-modal .hb-card{border-radius:14px;background:#ecf7f4;padding:12px 14px;margin:12px 0}
+.hb-account-modal .hb-code{font:800 1rem ui-monospace,SFMono-Regular,monospace;letter-spacing:.03em;overflow-wrap:anywhere;color:#086b6f}
+.hb-account-modal .hb-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hb-account-modal .hb-row .hb-auth-btn{width:auto;margin-top:0}
+.hb-account-modal .hb-msg{background:#eef7f5;border:1px solid #c8e2dd;color:#26585a;padding:11px;border-radius:11px;white-space:pre-line;font:.84rem/1.45 system-ui;margin:12px 0}
+.hb-account-modal .hb-msg.hb-error{background:#fff2f2;border-color:#f1caca;color:#8a3131}
+.hb-account-modal .hb-sync-choice{border-left:3px solid #15898b;padding:2px 0 6px 13px;margin:15px 0}
+.hb-account-modal .hb-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}
+.hb-account-modal .hb-metric{background:#e8f4f1;border-radius:12px;padding:10px;text-align:center}
+.hb-account-modal .hb-metric b{font-size:1.2rem;color:#0b6e70}
+.hb-account-modal .hb-metric span{display:block;font-size:.74rem;color:#52777a}
+.hb-account-open:focus-visible,.hb-auth-btn:focus-visible,.hb-account-close:focus-visible{outline:3px solid #f5bb4d;outline-offset:2px}
+@media(max-width:540px){.hb-account-modal{border-radius:18px;padding:20px 17px}.hb-account-open{font-size:.76rem;padding:8px 9px}.hb-account-open .hb-account-text{max-width:86px;text-overflow:ellipsis;overflow:hidden}}
+@media(prefers-color-scheme:dark){.hb-account-modal{background:#152f34;color:#e5f5f0;border-color:#30656a}.hb-account-modal h2{color:#e7fffa}.hb-account-modal h3,.hb-account-modal label{color:#bde4e1}.hb-account-modal p,.hb-account-modal .hb-muted{color:#a7c9c6}.hb-account-modal input,.hb-account-modal .hb-auth-btn:not(.hb-auth-primary){background:#213f44;color:#e3f8f3;border-color:#396d70}.hb-account-modal .hb-card,.hb-account-modal .hb-metric,.hb-account-modal .hb-msg{background:#25464a;color:#e0f5f1}.hb-account-modal .hb-code{color:#9be7e3}.hb-account-open{background:#1e5558;color:#e3f9f4;border-color:#47938d}.hb-account-modal .hb-auth-danger{color:#ffc4c4}}
