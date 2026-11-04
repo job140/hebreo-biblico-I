@@ -1,6 +1,6 @@
 # Hebreo Bíblico I
 
-Aplicación de estudio del hebreo bíblico para Android y navegador, versión **4.8.0**.
+Aplicación de estudio del hebreo bíblico para Android y navegador, versión **4.8.1**.
 
 Incluye 140 palabras, siete voces verbales, qatal, sufijos pronominales, ejemplos bíblicos, Génesis 1, Génesis 12, Éxodo 20, ejercicios y seguimiento local.
 
@@ -17,3 +17,7 @@ Publica la nueva versión sustituyendo `index.html` y, cuando corresponda, `gene
 Para editar los archivos con GitHub, utiliza **Add file → Upload files** o la interfaz de edición. No publiques los ZIP directamente.
 
 > Nota: los datos de progreso residen en el navegador del dispositivo, no en una cuenta en la nube. Cambiar de móvil o borrar datos del navegador requiere una copia de seguridad para conservarlos.
+
+## Preparación para Google Play
+
+Revisa [Google Play / guía y ficha](./google-play/README.md). Política pública: [privacidad.html](./privacidad.html). No hay todavía un Android App Bundle firmado ni publicación aprobada.

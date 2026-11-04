@@ -1,0 +1,13 @@
+# Nunca publicar secretos de Android o Google Play
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.env
+.env*
+android-keystore/
+play-service-account.json
+google-services.json
+*.aab
+*.apk

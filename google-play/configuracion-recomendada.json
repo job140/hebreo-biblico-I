@@ -1,0 +1,23 @@
+{
+  "nota": "REFERENCIA PARA PWABuilder, no importar automáticamente como un archivo de configuración nativo.",
+  "pwaUrl": "https://job140.github.io/hebreo-biblico-I/",
+  "manifestUrl": "https://job140.github.io/hebreo-biblico-I/manifest.webmanifest",
+  "nombreApp": "Hebreo Bíblico I",
+  "nombreCorto": "Hebreo I",
+  "packageIdPropuesto": "com.job140.hebreobiblicoi",
+  "versionNameAndroid": "1.0.0",
+  "versionCodeAndroid": 1,
+  "versionContenidoWeb": "4.8.1",
+  "targetSdkVersionMinimoGooglePlay2026": 36,
+  "modo": "Trusted Web Activity",
+  "startUrl": "/hebreo-biblico-I/index.html",
+  "themeColor": "#087E83",
+  "backgroundColor": "#F1F9F8",
+  "notificaciones": false,
+  "ubicacion": false,
+  "playBilling": false,
+  "assetlinksUrlRequerido": "https://job140.github.io/.well-known/assetlinks.json",
+  "assetlinksEstado": "PENDIENTE: obtener SHA-256 Play App Signing y crear repositorio sitio personal job140.github.io",
+  "firma": "La clave de firma debe generarla o administrarla el titular y NO debe subirse a GitHub",
+  "bundle": "NO GENERADO: completar configuración de firma y compilación TWA en PWABuilder"
+}
